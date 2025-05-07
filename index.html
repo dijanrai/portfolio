@@ -7,7 +7,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" rel="preload" as="style" />
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,90 +20,148 @@
           fontFamily: {
             inter: ['Inter', 'sans-serif'],
             grotesk: ['Space Grotesk', 'sans-serif'],
-          }
-        }
-      }
-    }
+          },
+          colors: {
+            primary: '#6D82FF', // Aquatic blue-purple shade
+            secondary: '#1f2937', // Dark gray for contrast
+          },
+          screens: {
+            'xs': '475px', // Additional breakpoint for better mobile responsiveness
+          },
+        },
+      },
+    };
   </script>
+
+  <!-- Dark Mode -->
+  <style>
+    .dark .bg-white { background-color: #1f2937; }
+    .dark .text-gray-800 { color: #d1d5db; }
+    .dark .bg-gray-50 { background-color: #374151; }
+    .dark .bg-gray-100 { background-color: #4b5563; }
+    .dark .bg-gray-200 { background-color: #6b7280; }
+    .dark .text-gray-600 { color: #9ca3af; }
+    .dark .text-gray-900 { color: #f3f4f6; }
+    .dark .bg-primary { background-color: #8AAEFF; } /* Lighter aquatic blue-purple for dark mode */
+    .dark .border-gray-300 { border-color: #6b7280; }
+    .dark .bg-secondary { background-color: #111827; }
+    .dark .text-gray-400 { color: #9ca3af; }
+  </style>
 </head>
 
-<body class="font-inter bg-white text-gray-800">
+<body class="font-inter bg-white text-gray-800 transition-colors duration-300">
+  <!-- Dark Mode Toggle Button -->
+  <button id="theme-toggle" class="fixed top-16 right-4 p-2 rounded-full bg-gray-200 hover:bg-gray-300 z-50">
+    <i class="fas fa-moon text-gray-800"></i>
+  </button>
+
+  <!-- Scroll to Top Button -->
+  <button id="scroll-to-top" class="fixed bottom-6 right-6 p-3 rounded-full bg-primary text-white hover:bg-blue-700 transition-opacity duration-300 opacity-0">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <header>
-    <nav class="flex items-center gap-4 py-4 px-4 md:px-8 bg-gray-100 shadow-md hover:bg-gray-200 transition duration-300 text-lg font-bold">
+    <nav id="navbar" class="flex items-center gap-4 py-4 px-4 md:px-8 bg-gray-100 shadow-md transition-all duration-300 text-lg font-bold sticky top-0 z-40">
       <a href="#">
         <img src="/logo.png" alt="Logo" class="h-10 w-auto" />
       </a>
       <h1 class="text-2xl font-grotesk font-bold">
-        <a href="#">Dijan Rai</a>
+        <a href="#" class="hover:text-primary transition">Dijan Rai</a>
       </h1>
       <ul class="flex gap-4 ml-auto">
-        <li><a href="#about" class="hover:text-blue-400 transition">About Me</a></li>
-        <li><a href="#projects" class="hover:text-blue-400 transition">Projects</a></li>
-        <li><a href="#contact" class="hover:text-blue-400 transition">Contact</a></li>
+        <li><a href="#skills" class="hover:text-primary transition">Skills</a></li>
+        <li><a href="#projects" class="hover:text-primary transition">Projects</a></li>
+        <li><a href="#contact" class="hover:text-primary transition">Contact</a></li>
       </ul>
     </nav>
   </header>
-  
+
   <main>
     <!-- About Section -->
-    <section id="about" class="px-4 py-12 text-center max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-grotesk font-bold mb-6">Rai — About Me</h2>
-      <p class="text-lg leading-relaxed">
+    <section id="about" class="px-4 py-16 text-center max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-grotesk font-bold mb-6 text-gray-900">Rai — About Me</h2>
+      <p class="text-lg leading-relaxed text-gray-600">
         I'm a passionate student <strong>Full Stack Web Developer</strong> with an interest in making functional and attractive websites.
       </p>
-      <p class="text-lg mt-4 leading-relaxed">
+      <p class="text-lg mt-4 leading-relaxed text-gray-600">
         When I’m not coding, you’ll probably find me scrolling some TikToks, learning something new on YouTube, or just sipping coffee and gaming.
       </p>
-      <div class="mt-6">
-        <a href="#contact" class="inline-block bg-black text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 hover:text-blue-400 transition">
-          Contact Me Now
+      <div class="mt-8">
+        <a href="#contact" class="inline-block bg-primary text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300 transform hover:scale-105">
+          Get In Touch
         </a>
       </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="py-12 bg-gray-50 px-4">
-      <h2 class="text-3xl md:text-4xl font-grotesk font-bold text-center mb-10">My Skills</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition transform hover:scale-105">
-          <h3 class="text-xl font-semibold mb-2"><i class="fa-brands fa-css3-alt"></i> Tailwind CSS</h3>
-          <p class="text-gray-600">Creating beautiful, fast, and fully responsive UIs with utility-first classes.</p>
+    <section id="skills" class="py-16 bg-gray-50 px-4">
+      <h2 class="text-3xl md:text-4xl font-grotesk font-bold text-center mb-12 text-gray-900">My Skills</h2>
+      <div class="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div class="skill-card bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 opacity-0 translate-y-10">
+          <h3 class="text-xl font-semibold mb-2 text-primary"><i class="fa-brands fa-css3-alt mr-2"></i> CSS</h3>
+          <p class="text-gray-600 mb-4">Creating beautiful, fast, and fully responsive UIs with perfection.</p>
+          <div class="progress-bar h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div class="progress h-full bg-primary transition-all duration-1000" style="width: 0%;" data-progress="85"></div>
+          </div>
         </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition transform hover:scale-105">
-          <h3 class="text-xl font-semibold mb-2"><i class="fa-brands fa-js"></i> Node.js</h3>
-          <p class="text-gray-600">Building efficient backend systems, APIs, and real-time applications.</p>
+        <div class="skill-card bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 opacity-0 translate-y-10">
+          <h3 class="text-xl font-semibold mb-2 text-primary"><i class="fa-brands fa-js mr-2"></i> JavaScript</h3>
+          <p class="text-gray-600 mb-4">Diving deep into JavaScript to build functional web apps.</p>
+          <div class="progress-bar h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div class="progress h-full bg-primary transition-all duration-1000" style="width: 0%;" data-progress="70"></div>
+          </div>
         </div>
-        <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition transform hover:scale-105">
-          <h3 class="text-xl font-semibold mb-2"><i class="fa-brands fa-laravel"></i> Laravel</h3>
-          <p class="text-gray-600">Developing modern PHP applications with Laravel’s elegant syntax.</p>
+        <div class="skill-card bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 opacity-0 translate-y-10">
+          <h3 class="text-xl font-semibold mb-2 text-primary"><i class="fa-brands fa-laravel mr-2"></i> Laravel</h3>
+          <p class="text-gray-600 mb-4">Currently learning Laravel framework.</p>
+          <div class="progress-bar h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div class="progress h-full bg-primary transition-all duration-1000" style="width: 0%;" data-progress="50"></div>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-12 px-4">
-      <h2 class="text-3xl md:text-4xl font-grotesk font-bold text-center mb-10">Projects</h2>
-      <div class="flex justify-center">
-        <div class="bg-white shadow-md rounded-2xl p-6 hover:shadow-lg transition transform hover:scale-105 max-w-md">
-          <h3 class="text-xl font-semibold mb-2"><i class="fa-solid fa-address-card"></i> Portfolio Website</h3>
+    <section id="projects" class="py-16 px-4">
+      <h2 class="text-3xl md:text-4xl font-grotesk font-bold text-center mb-12 text-gray-900">Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <h3 class="text-xl font-semibold mb-2 text-primary"><i class="fa-solid fa-address-card mr-2"></i> Portfolio Website</h3>
           <p class="text-gray-600 mb-4">One of my first projects to showcase my work & experience.</p>
-          <a href="#" class="text-black hover:text-blue-500 font-bold inline-block">
-            View Project <i class="fa-solid fa-arrow-right"></i>
+          <a href="#" class="text-primary hover:text-blue-600 font-bold inline-block transition-colors duration-300">
+            View Project <i class="fa-solid fa-arrow-right ml-1"></i>
+          </a>
+        </div>
+        <div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <h3 class="text-xl font-semibold mb-2 text-primary"><i class="fa-solid fa-utensils mr-2"></i> Tokubetsu Restaurant Website</h3>
+          <p class="text-gray-600 mb-4">A responsive website for a restaurant, built with perfection.</p>
+          <a href="https://tokubetsu.netlify.app/" target="_blank" class="text-primary hover:text-blue-600 font-bold inline-block transition-colors duration-300">
+            View Project <i class="fa-solid fa-arrow-right ml-1"></i>
           </a>
         </div>
       </div>
     </section>
-    
+
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-100 px-4">
-      <div class="max-w-2xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-grotesk font-bold mb-6">Say Hello or Drop a Message.</h2>
-        <form action="mailto:info@dzzn.org" method="POST" enctype="text/plain" class="space-y-6 text-left">
-          <input type="text" name="name" placeholder="Your Name" required class="w-full border rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
-          <input type="email" name="email" placeholder="Your Email" required class="w-full border rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
-          <textarea name="message" rows="5" placeholder="Your Message" required class="w-full border rounded px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
-          <button type="submit" class="w-full bg-black text-white py-3 rounded hover:bg-gray-800 hover:text-blue-400 transition">
+    <section id="contact" class="py-16 bg-gradient-to-br from-gray-50 to-gray-200 px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-grotesk font-bold mb-8 text-gray-900 tracking-tight">
+          Drop Me a Message!
+        </h2>
+        <form action="https://formspree.io/f/xyzwkarz" method="POST" class="space-y-6 text-left" aria-labelledby="contact-heading">
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200" aria-required="true" />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200" aria-required="true" />
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Your Message</label>
+            <textarea id="message" name="message" rows="6" placeholder="Write your message here..." required class="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition duration-200 resize-y" aria-required="true"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-primary hover:bg-blue-600 text-white py-3 rounded-lg font-medium focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105">
             Send Message
           </button>
         </form>
@@ -112,18 +170,20 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-8">
+  <footer class="bg-secondary text-white py-8">
     <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <div class="text-center md:text-left">
         <h3 class="text-xl font-bold">Dijan Rai</h3>
         <p class="text-gray-400 text-sm">© 2025 All rights reserved.</p>
       </div>
       <div class="flex gap-4">
-        <a href="https://github.com/dijanrai" target="_blank" class="hover:text-blue-400"><i class="fab fa-github"></i></a>
-        <a href="https://np.linkedin.com/in/dijan-rai-037014362" target="_blank" class="hover:text-blue-500"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/dijanrai" target="_blank" class="hover:text-blue-400 transition-colors"><i class="fab fa-github text-xl"></i></a>
+        <a href="https://np.linkedin.com/in/dijan-rai-037014362" target="_blank" class="hover:text-blue-500 transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
       </div>
     </div>
   </footer>
 
+  <!-- External JavaScript -->
+  <script src="/index.js" defer></script>
 </body>
 </html>
